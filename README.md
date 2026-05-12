@@ -7,3 +7,8 @@ cách viết tuân thủ 13 practice tài liệu link: https://florimond.dev/en/
 
 
 tài liệu sách dạy custom Exception: trang Exception javapoint
+
+
+tài liệu để fix lỗi bị lỗi sever những vẫn trả về 200 OK 
+-@ControllerAdvice 
+link: https://zetcode.com/springboot/controlleradvice/
