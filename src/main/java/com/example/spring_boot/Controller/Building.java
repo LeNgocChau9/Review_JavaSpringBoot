@@ -25,6 +25,7 @@ public class Building {
     @GetMapping(value="/api/v1/building")
     @ResponseBody
     public Object SearchBuilding(@RequestParam Map<String,String> params){
+        System.out.println(5/0);
         return params;
     }
     // cách 1 sài phương thức Post cách 1 sài map hoặc sài java bean mà đa số sài java bean
