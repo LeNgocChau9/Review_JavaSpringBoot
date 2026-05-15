@@ -42,9 +42,13 @@ danh tính của máy khách được máy chủ biết đến.
 
 - Kết nối jdbc với my SQL
 
-   // static final String DB_URL = "jdbc:mysql://localhost:3306/estatebasic";
+   //
+   static final String DB_URL = "jdbc:mysql://localhost:3306/estatebasic";
+  
     static final String USER = "root";
+  
     static final String PASS = "123456";
+  
   //
 
 
@@ -62,8 +66,14 @@ danh tính của máy khách được máy chủ biết đến.
 
 
 +Presentation Layer => @Restcontroller => controller Class
+
+
 +Business Logic Layer => @Service => service Class xử lý dữ liệu đầu ra theo yêu cầu của client
+
+
+
 +Data Access Layer => @Repository => Repository Class
+
                                     (Entity map 1:1 DB) hứng dữ từ ResultSet trả ra
 
 
