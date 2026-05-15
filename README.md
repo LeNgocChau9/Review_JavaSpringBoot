@@ -76,6 +76,15 @@ danh tính của máy khách được máy chủ biết đến.
 
                                     (Entity map 1:1 DB) hứng dữ từ ResultSet trả ra
 
++Lấy dữ liệu lên : jdbc --> jpa --> Sring data jpa
+
+
+ResultSet -> (JavaBean) Entity (map 1:1 với DB) -> Filter (layer Service)  -> DTO (model) -> View
+
+
++ update dữ liệu
+
+View -> DTO(model) ->Filter (Service) -> Entity -> DB
 
 
 
