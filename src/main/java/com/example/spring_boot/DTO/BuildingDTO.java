@@ -5,8 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class AddRoomBean {
+public class BuildingDTO {
     private String name;
     private String addrress;
     private Integer Age;
+    private String district;
 }

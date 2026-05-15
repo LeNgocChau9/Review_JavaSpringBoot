@@ -1,22 +1,25 @@
 package com.example.spring_boot.Controller;
 
-import com.example.spring_boot.DTO.AddRoomBean;
 import com.example.spring_boot.DTO.ErrorDTO;
 import com.example.spring_boot.ExceptionCustom.ExceptionValidate;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-@Controller
-public class Building {
+@RestController
+public class BuildingDTO {
+    // kết nối jdbc my SQL
+    static final String DB_URL = "jdbc:mysql://localhost:3306/estatebasic";
+    static final String USER = "root";
+    static final String PASS = "123456";
 
     @GetMapping(value="/api/building")
     @ResponseBody
     public Object SearchBuilding(@RequestParam(value = "name") String name,
                                @RequestParam(value = "numberOfBasement",required = false) String numberOfBasement){
-        AddRoomBean room = new AddRoomBean();
+        com.example.spring_boot.DTO.BuildingDTO room = new com.example.spring_boot.DTO.BuildingDTO();
         room.setName(name);
         room.setAddrress(numberOfBasement);
         return room;
@@ -32,7 +35,7 @@ public class Building {
 
     @PostMapping(value="/api/room")
     @ResponseBody
-    public AddRoomBean AddRoom(@RequestBody AddRoomBean Room){
+    public com.example.spring_boot.DTO.BuildingDTO AddRoom(@RequestBody com.example.spring_boot.DTO.BuildingDTO Room){
         return Room;
     }
     //sài java bean để nhận dữ liệu
@@ -47,7 +50,7 @@ public class Building {
 
     @GetMapping(value = "/api/tryCatch")
     @ResponseBody
-    public Object TryCatch(@RequestBody AddRoomBean Room ){
+    public Object TryCatch(@RequestBody com.example.spring_boot.DTO.BuildingDTO Room ){
         try{
             System.out.println(5/0);
         }
@@ -64,7 +67,7 @@ public class Building {
 
     @PostMapping(value="/api/newhome")
     @ResponseBody
-    public Object NewHome(@RequestBody AddRoomBean Room){
+    public Object NewHome(@RequestBody com.example.spring_boot.DTO.BuildingDTO Room){
         try{
             validate(Room);
         }
@@ -78,10 +81,17 @@ public class Building {
         }
         return Room;
     }
-    public void validate(AddRoomBean Room) throws ExceptionValidate {
+    public void validate(com.example.spring_boot.DTO.BuildingDTO Room) throws ExceptionValidate {
         if(Room.getName() == null)  {
             throw new ExceptionValidate("all attribute must not null");
         }
+    }
+
+    @PostMapping(value = "/api/building")
+    public List<BuildingDTO> Building(){
+
+        List<BuildingDTO> list = new ArrayList<BuildingDTO>();
+        return null;
     }
     //try catch nhưng vẫn trả cho client biết tên lỗi và chi tiết lỗi
     //custom exception cho chính mình sài
