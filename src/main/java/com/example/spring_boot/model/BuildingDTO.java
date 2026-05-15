@@ -1,4 +1,4 @@
-package com.example.spring_boot.DTO;
+package com.example.spring_boot.model;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +8,8 @@ import lombok.Setter;
 public class BuildingDTO {
     private String name;
     private String addrress;
-    private Integer Age;
+    private String street;
+    private String ward;
     private String district;
+    private Integer numberOfBasement;
 }

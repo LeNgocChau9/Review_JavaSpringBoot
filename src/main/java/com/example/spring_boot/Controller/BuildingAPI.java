@@ -1,27 +1,23 @@
 package com.example.spring_boot.Controller;
 
-import com.example.spring_boot.DTO.BuildingDTO;
-import com.example.spring_boot.DTO.ErrorDTO;
+import com.example.spring_boot.model.BuildingDTO;
+import com.example.spring_boot.model.ErrorDTO;
 import com.example.spring_boot.ExceptionCustom.ExceptionValidate;
+import com.example.spring_boot.repository.entity.BuildingEntity;
+import com.example.spring_boot.service.BuildingService;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 public class BuildingAPI {
-    // kết nối jdbc my SQL
-    static final String DB_URL = "jdbc:mysql://localhost:3306/estatebasic";
-    static final String USER = "root";
-    static final String PASS = "123456";
-
     @GetMapping(value="/api/buildings")
     @ResponseBody
     public Object SearchBuilding(@RequestParam(value = "name") String name,
                                @RequestParam(value = "numberOfBasement",required = false) String numberOfBasement){
-        com.example.spring_boot.DTO.BuildingDTO room = new com.example.spring_boot.DTO.BuildingDTO();
+        BuildingDTO room = new BuildingDTO();
         room.setName(name);
         room.setAddrress(numberOfBasement);
         return room;
@@ -37,7 +33,7 @@ public class BuildingAPI {
 
     @PostMapping(value="/api/room")
     @ResponseBody
-    public com.example.spring_boot.DTO.BuildingDTO AddRoom(@RequestBody com.example.spring_boot.DTO.BuildingDTO Room){
+    public BuildingDTO AddRoom(@RequestBody BuildingDTO Room){
         return Room;
     }
     //sài java bean để nhận dữ liệu
@@ -52,7 +48,7 @@ public class BuildingAPI {
 
     @GetMapping(value = "/api/tryCatch")
     @ResponseBody
-    public Object TryCatch(@RequestBody com.example.spring_boot.DTO.BuildingDTO Room ){
+    public Object TryCatch(@RequestBody BuildingDTO Room ){
         try{
             System.out.println(5/1);
         }
@@ -69,7 +65,7 @@ public class BuildingAPI {
 
     @PostMapping(value="/api/newhome")
     @ResponseBody
-    public Object NewHome(@RequestBody com.example.spring_boot.DTO.BuildingDTO Room){
+    public Object NewHome(@RequestBody BuildingDTO Room){
         try{
             validate(Room);
         }
@@ -83,32 +79,19 @@ public class BuildingAPI {
         }
         return Room;
     }
-    public void validate(com.example.spring_boot.DTO.BuildingDTO Room) throws ExceptionValidate {
+    public void validate(BuildingDTO Room) throws ExceptionValidate {
         if(Room.getName() == null)  {
             throw new ExceptionValidate("all attribute must not null");
         }
     }
-// lấy dữ liệu jdbc cơ bản
+    private BuildingService buildingService;
     @GetMapping(value = "/api/building")
-    public List<BuildingDTO> Building(){
-        String sql = "SELECT * FROM building";
-        List <BuildingDTO> result = new ArrayList<>();
-        try(Connection conn = DriverManager.getConnection(DB_URL,USER,PASS)){
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
-            // lặp để lấy toàn bộ dữ liệu
-            while (rs.next()){
-                BuildingDTO building = new BuildingDTO();
-                building.setName(rs.getString("name"));
-                result.add(building);
-            }
-        }
-        catch(SQLException e){
-            e.printStackTrace();
-            System.out.println("Connect database failed");
-        }
+    public List<BuildingDTO> getBuilding(){
+            List<BuildingDTO> result = buildingService.findAll();
+
         return result;
     }
+
     //try catch nhưng vẫn trả cho client biết tên lỗi và chi tiết lỗi
     //custom exception cho chính mình sài
 }

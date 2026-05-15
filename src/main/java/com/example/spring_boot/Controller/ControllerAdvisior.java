@@ -1,7 +1,7 @@
-package com.example.spring_boot.ControllerAdvisior;
+package com.example.spring_boot.Controller;
 
 
-import com.example.spring_boot.DTO.ErrorDTO;
+import com.example.spring_boot.model.ErrorDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
