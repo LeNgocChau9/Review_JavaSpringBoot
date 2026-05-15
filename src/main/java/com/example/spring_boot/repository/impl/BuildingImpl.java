@@ -32,8 +32,8 @@ public class BuildingImpl implements BuildingRepository {
                 building.setId(rs.getLong("id"));
                 building.setStreet(rs.getString("street"));
                 building.setWard(rs.getString("ward"));
-                building.setDistrict(rs.getString("district"));
-                building.setNumberOfBasement(rs.getInt("number_of_basement"));
+                building.setDistrictid(rs.getString("districtid"));
+                building.setNumberofbasement(rs.getInt("numberofbasement"));
                 result.add(building);
             }
         }

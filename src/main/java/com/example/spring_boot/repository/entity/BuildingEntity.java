@@ -10,6 +10,6 @@ public class BuildingEntity {
     private String name;
     private String street;
     private String ward;
-    private String district;
-    private Integer numberOfBasement;
+    private String districtid;
+    private Integer numberofbasement;
 }

@@ -5,6 +5,7 @@ import com.example.spring_boot.model.ErrorDTO;
 import com.example.spring_boot.ExceptionCustom.ExceptionValidate;
 import com.example.spring_boot.repository.entity.BuildingEntity;
 import com.example.spring_boot.service.BuildingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -84,11 +85,11 @@ public class BuildingAPI {
             throw new ExceptionValidate("all attribute must not null");
         }
     }
+    @Autowired
     private BuildingService buildingService;
     @GetMapping(value = "/api/building")
     public List<BuildingDTO> getBuilding(){
             List<BuildingDTO> result = buildingService.findAll();
-
         return result;
     }
 

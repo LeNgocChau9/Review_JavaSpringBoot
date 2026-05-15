@@ -3,14 +3,15 @@ package com.example.spring_boot.service.Impl;
 import com.example.spring_boot.model.BuildingDTO;
 import com.example.spring_boot.repository.BuildingRepository;
 import com.example.spring_boot.repository.entity.BuildingEntity;
-import com.example.spring_boot.repository.impl.BuildingImpl;
 import com.example.spring_boot.service.BuildingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 @Service
 public class BuidingServiceImpl implements BuildingService {
+    @Autowired
     private BuildingRepository buildingRepository;
     @Override
     public List<BuildingDTO> findAll() {
@@ -21,11 +22,11 @@ public class BuidingServiceImpl implements BuildingService {
             buildingDTO.setName(iteam.getName());
             buildingDTO.setAddrress(iteam.getStreet()
                     + iteam.getWard()
-                    + iteam.getDistrict());
-            buildingDTO.setNumberOfBasement(iteam.getNumberOfBasement());
+                    + iteam.getDistrictid());
+            buildingDTO.setNumberofbasement(iteam.getNumberofbasement());
             buildingDTO.setStreet(iteam.getStreet());
             buildingDTO.setWard(iteam.getWard());
-            buildingDTO.setDistrict(iteam.getDistrict());
+            buildingDTO.setDistrictid(iteam.getDistrictid());
             result.add(buildingDTO);
         }
         return result;
