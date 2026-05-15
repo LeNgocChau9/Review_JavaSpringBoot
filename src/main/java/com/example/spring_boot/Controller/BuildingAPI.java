@@ -1,21 +1,23 @@
 package com.example.spring_boot.Controller;
 
+import com.example.spring_boot.DTO.BuildingDTO;
 import com.example.spring_boot.DTO.ErrorDTO;
 import com.example.spring_boot.ExceptionCustom.ExceptionValidate;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-public class BuildingDTO {
+public class BuildingAPI {
     // kết nối jdbc my SQL
     static final String DB_URL = "jdbc:mysql://localhost:3306/estatebasic";
     static final String USER = "root";
     static final String PASS = "123456";
 
-    @GetMapping(value="/api/building")
+    @GetMapping(value="/api/buildings")
     @ResponseBody
     public Object SearchBuilding(@RequestParam(value = "name") String name,
                                @RequestParam(value = "numberOfBasement",required = false) String numberOfBasement){
@@ -25,7 +27,7 @@ public class BuildingDTO {
         return room;
     }
     // cách 2 khi trường hợp quá nhiều fill để làm request params
-    @GetMapping(value="/api/v1/building")
+    @GetMapping(value="/api/v1/buildings")
     @ResponseBody
     public Object SearchBuilding(@RequestParam Map<String,String> params){
         System.out.println(5/0);
@@ -52,7 +54,7 @@ public class BuildingDTO {
     @ResponseBody
     public Object TryCatch(@RequestBody com.example.spring_boot.DTO.BuildingDTO Room ){
         try{
-            System.out.println(5/0);
+            System.out.println(5/1);
         }
         catch(Exception e){
             ErrorDTO ErrorDetials = new ErrorDTO();
@@ -86,12 +88,26 @@ public class BuildingDTO {
             throw new ExceptionValidate("all attribute must not null");
         }
     }
-
-    @PostMapping(value = "/api/building")
+// lấy dữ liệu jdbc cơ bản
+    @GetMapping(value = "/api/building")
     public List<BuildingDTO> Building(){
-
-        List<BuildingDTO> list = new ArrayList<BuildingDTO>();
-        return null;
+        String sql = "SELECT * FROM building";
+        List <BuildingDTO> result = new ArrayList<>();
+        try(Connection conn = DriverManager.getConnection(DB_URL,USER,PASS)){
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            // lặp để lấy toàn bộ dữ liệu
+            while (rs.next()){
+                BuildingDTO building = new BuildingDTO();
+                building.setName(rs.getString("name"));
+                result.add(building);
+            }
+        }
+        catch(SQLException e){
+            e.printStackTrace();
+            System.out.println("Connect database failed");
+        }
+        return result;
     }
     //try catch nhưng vẫn trả cho client biết tên lỗi và chi tiết lỗi
     //custom exception cho chính mình sài
