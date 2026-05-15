@@ -48,7 +48,24 @@ danh tính của máy khách được máy chủ biết đến.
   //
 
 
-
-
   + Tuân thủ nguyên tắc SOLID
   + link: https://www.educative.io/answers/what-are-the-solid-principles-in-java
+
+
+
++ Xây dựng mô hình 3 layer MVC
+
++ Code quá nhiều trong 1 file vi phạm nguyên tắc SOLID.
++ Người sau đọc rất tốn thời gian và khó debug.
+
+<img width="1384" height="885" alt="image" src="https://github.com/user-attachments/assets/213988ac-72b7-45db-8a21-e0f75453f19c" />
+
+
++Presentation Layer => @Restcontroller => controller Class
++Business Logic Layer => @Service => service Class xử lý dữ liệu đầu ra theo yêu cầu của client
++Data Access Layer => @Repository => Repository Class
+                                    (Entity map 1:1 DB) hứng dữ từ ResultSet trả ra
+
+
+
+
