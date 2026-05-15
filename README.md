@@ -46,3 +46,9 @@ danh tính của máy khách được máy chủ biết đến.
     static final String USER = "root";
     static final String PASS = "123456";
   //
+
+
+
+
+  + Tuân thủ nguyên tắc SOLID
+  + link: https://www.educative.io/answers/what-are-the-solid-principles-in-java
