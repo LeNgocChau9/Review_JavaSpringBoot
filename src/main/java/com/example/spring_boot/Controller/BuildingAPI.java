@@ -3,7 +3,6 @@ package com.example.spring_boot.Controller;
 import com.example.spring_boot.model.BuildingDTO;
 import com.example.spring_boot.model.ErrorDTO;
 import com.example.spring_boot.ExceptionCustom.ExceptionValidate;
-import com.example.spring_boot.repository.entity.BuildingEntity;
 import com.example.spring_boot.service.BuildingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -24,7 +24,12 @@ public class BuildingImpl implements BuildingRepository {
         List <BuildingEntity> result = new ArrayList<>();
         try(Connection conn = DriverManager.getConnection(DB_URL,USER,PASS)){
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = stmt.executeQuery(sql);// thực thi câu lệnh SQL và trả về ResultSet
+            // giống ArrayList, chứa nhiều dòng/ record , mỗi dòng là info của môn học
+            // code || Name || Desc | Creaits | StudyHours
+            // chơi JDBC thì phảo nhớ tên cột !!!! Mang hơi hướng DB Frist, DB Oriented
+            // vòng lặp lấy các dòng , mỗi dòng chủ dộng nhớ tên cột table , lấy tên cột
+            // chính là nhược điểm của JDBC
             // lặp để lấy toàn bộ dữ liệu
             while (rs.next()){
                 BuildingEntity building = new BuildingEntity();
