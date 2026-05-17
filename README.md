@@ -79,6 +79,12 @@ danh tính của máy khách được máy chủ biết đến.
 +Lấy dữ liệu lên : jdbc --> jpa --> Sring data jpa
 
 
+
+<img width="1229" height="594" alt="image" src="https://github.com/user-attachments/assets/9808c713-f67a-4931-a378-c6bb1db66124" />
+
+
+
+
 ResultSet -> (JavaBean) Entity (map 1:1 với DB) -> Filter (layer Service)  -> DTO (model) -> View
 
 
